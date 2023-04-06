@@ -1,0 +1,72 @@
+<div class="container">
+    <h1 style="color: rgb(103, 165, 216); font-weight: bold;">Please Update Your Excel File</h1>
+    <input type="file" class="form-control" placeholder="Choose .XLSX File" (change)="UpdateFile($event)">
+    <div *ngIf="invalidFile">
+        <h3 class="fw-bold" style="color: rgb(247, 45, 45); margin-left: 2%;margin-top: 2%;">ERROR</h3>
+        <cdk-virtual-scroll-viewport itemSize="20" class="viewport">
+            <div *cdkVirtualFor="let error of errorMess" style="margin-left: 2%; color: red;" class="items">
+                Error at record {{error.index}}: {{error.mess}}
+            </div>
+        </cdk-virtual-scroll-viewport>
+    </div>
+    <div style="margin-top: 5%;" *ngIf="dataSourse !=null">
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="displayData" class="">
+                <ng-container matColumnDef="index">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element, let i = index">
+                        {{(i)+(pageEvent.pageSize*pageEvent.pageIndex) +1}} </td>
+                </ng-container>
+                <ng-container matColumnDef="staffName">
+                    <th mat-header-cell *matHeaderCellDef> staffName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.staffName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef> userName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="age">
+                    <th mat-header-cell *matHeaderCellDef> age </th>
+                    <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+                </ng-container>
+                <ng-container matColumnDef="gender">
+                    <th mat-header-cell *matHeaderCellDef> gender </th>
+                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                </ng-container>
+                <ng-container matColumnDef="department">
+                    <th mat-header-cell *matHeaderCellDef> department </th>
+                    <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+                </ng-container>
+                <ng-container matColumnDef="specialization">
+                    <th mat-header-cell *matHeaderCellDef> specialization </th>
+                    <td mat-cell *matCellDef="let element"> {{element.specialization}} </td>
+                </ng-container>
+                <ng-container matColumnDef="phoneNumber">
+                    <th mat-header-cell *matHeaderCellDef> phoneNumber </th>
+                    <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef> address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data to Preview </td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[7]" showFirstLastButtons="" (page)="pageEvent = $event">
+            </mat-paginator>
+        </div>
+    </div>
+
+    <div class="text-center" style="margin-top: 5%; width: 100%;">
+        <button type="button" class="btn btn-md btn-outline-danger" mat-dialog-close>Cancel</button>
+        <button *ngIf="dataSourse !=null" style="margin-left: 10%;" type="button" class="btn btn-md btn-outline-success"
+            [disabled]="invalidFile" (click)="UploadFile()">Upload</button>
+    </div>
+</div>

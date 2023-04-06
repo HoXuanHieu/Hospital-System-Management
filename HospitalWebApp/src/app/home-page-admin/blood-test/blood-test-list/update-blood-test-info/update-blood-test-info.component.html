@@ -1,0 +1,93 @@
+<div class="container">
+    <h1 class="fw-bold" style="color: rgb(103, 165, 216);">BLOOD TEST REGISTER</h1>
+    <form [formGroup]="bloodTestForm" style="padding-top: 2%;" (submit)="onSubmit()">
+        <input type="hidden" formControlName="patientId" required>
+        <mat-form-field appearance="fill">
+            <mat-label> Mediclates Type</mat-label>
+            <mat-select formControlName="mediclatestype" required>
+                <mat-option value="Complete blood count (CBC)">Complete blood count (CBC)</mat-option>
+                <mat-option value="Basic metabolic panel">Basic metabolic panel</mat-option>
+                <mat-option value="Blood enzyme tests">Blood enzyme tests</mat-option>
+                <mat-option value="Blood tests to check for heart disease">Blood tests to check for
+                    heart disease</mat-option>
+                <mat-option value="Blood clotting tests">Blood clotting tests</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="mediclatestype && mediclatestype.invalid && mediclatestype.touched">
+            <div *ngIf="mediclatestype.errors?.['required']">
+                <p class="text" style="color: red;"> Mediclates Type must be required</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label> Blood Group</mat-label>
+                    <mat-select formControlName="bloodGroup" required>
+                        <mat-option value="A">A</mat-option>
+                        <mat-option value="B">B</mat-option>
+                        <mat-option value="O">O</mat-option>
+                        <mat-option value="AB">AB</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div *ngIf="bloodGroup && bloodGroup.invalid && bloodGroup.touched">
+                    <div *ngIf="bloodGroup.errors?.['required']">
+                        <p class="text" style="color: red;"> Blood Group must be required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Haemoglobin</mat-label>
+                    <input type="number" step="0.1" matInput formControlName="haemoglobin" required>
+                </mat-form-field>
+                <div *ngIf="haemoglobin && haemoglobin.invalid && haemoglobin.touched">
+                    <div *ngIf="haemoglobin.errors?.['required']">
+                        <p class="text" style="color: red;">Haemoglobin must be required</p>
+                    </div>
+                    <div *ngIf="haemoglobin.errors?.['min'] || haemoglobin.errors?.['max']">
+                        <p class="text" style="color: red;">Invalid haemoglobin amount</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Blood Sugar</mat-label>
+                    <input type="number" step="0.1" matInput formControlName="bloodsugar" required>
+                </mat-form-field>
+                <div *ngIf="bloodsugar && bloodsugar.invalid && bloodsugar.touched">
+                    <div *ngIf="bloodsugar.errors?.['required']">
+                        <p class="text" style="color: red;">Blood sugar must be required</p>
+                    </div>
+                    <div *ngIf="bloodsugar.errors?.['min'] || bloodsugar.errors?.['max']">
+                        <p class="text" style="color: red;">Invalid Blood sugar amount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Sacid</mat-label>
+                    <input type="number" step="0.1" matInput formControlName="sacid" required>
+                </mat-form-field>
+                <div *ngIf="sacid && sacid.invalid && sacid.touched">
+                    <div *ngIf="sacid.errors?.['required']">
+                        <p class="text" style="color: red;">Sacid must be required</p>
+                    </div>
+                    <div *ngIf="sacid.errors?.['min'] || sacid.errors?.['max']">
+                        <p class="text" style="color: red;">Invalid Sacid amount</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea type="text" matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <div class="text-center" style="margin-top: 2%; width: 100%;">
+            <button type="submit" style=" width: 60%;" class="btn btn-lg btn-outline-danger"
+                [disabled]="bloodTestForm.invalid">Submit</button>
+        </div>
+    </form>
+</div>

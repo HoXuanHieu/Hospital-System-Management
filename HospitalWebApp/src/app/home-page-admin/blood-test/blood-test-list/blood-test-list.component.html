@@ -1,0 +1,79 @@
+<app-header-admin></app-header-admin>
+<div class="p-3 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-4 text-center">
+        <h1 class="display-4 fw-bold" style="color: rgb(64, 122, 207);">BLOOD TEST SERVICE</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">    
+                <button type="button" mat-raised-button color="primary" routerLink="/blood-test-form">
+                    Register new Blood Test</button>
+            </div>
+        <div class="col-md-10">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Search Blood Test</mat-label>
+                <input matInput (keyup)="Search($event)" #input>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSourse" class="">
+            <ng-container matColumnDef="patientName">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Patient Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.patientName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="mediclatestype">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Mediclatestype </th>
+                <td mat-cell *matCellDef="let element"> {{element.mediclatestype}} </td>
+            </ng-container>
+            <ng-container matColumnDef="bloodGroup">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Blood Group </th>
+                <td mat-cell *matCellDef="let element"> {{element.bloodGroup}} </td>
+            </ng-container>
+            <ng-container matColumnDef="haemoglobin">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> haemoglobin (g/dl) </th>
+                <td mat-cell *matCellDef="let element"> {{element.haemoglobin}} </td>
+            </ng-container>
+            <ng-container matColumnDef="bloodsugar">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> bloodsugar (mmol/L) </th>
+                <td mat-cell *matCellDef="let element"> {{element.bloodsugar}} </td>
+            </ng-container>
+            <ng-container matColumnDef="sacid">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> sacid (mg/dl) </th>
+                <td mat-cell *matCellDef="let element"> {{element.sacid}} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> description </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Action </th>
+                <td mat-cell *matCellDef="let element" class="text-center">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <i class="fa-solid fa-pen fa-lg text-warning action" 
+                            (click)="openUpdatePatient(element)"
+                                style="cursor: pointer;" matTooltip="Update record"></i>
+                        </div>
+                        <div class="col-md-6">
+                            <i class="fa fa-trash fa-lg text-danger action" style="cursor: pointer;"
+                                (click)="openDeleteBloodTestInfo(element.bloodTestId, element.patientName)"
+                                matTooltip="Delect record"></i>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <!-- <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td> -->
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons="">
+        </mat-paginator>
+
+    </div>
+</div>

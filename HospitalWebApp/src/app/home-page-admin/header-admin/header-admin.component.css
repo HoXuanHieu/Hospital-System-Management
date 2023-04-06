@@ -1,0 +1,69 @@
+.nav_left {
+    background-color: #419dd3;
+    border-top-left-radius: 48px;
+    border-bottom-left-radius: 48px;
+}
+ 
+.nav-tabs .nav-link.active {
+    background-color: transparent;
+    border-color: transparent;
+    border-top: 4px solid #fff;
+    color: #fff;
+}
+ 
+.nav-tabs .nav-link {
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 0 30px 0 40px;
+}
+ 
+.nav-tabs {
+    border-bottom: none;
+}
+ 
+.nav-link {
+    padding: 1rem 0.5rem;
+    color: #fff;
+}
+ 
+.nav-link:focus,
+.nav-link:hover {
+    color: #fff;
+}
+ 
+.search_input {
+    width:100%;
+    border-radius: 10px;
+    border: none;
+    line-height: initial;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #f19159;
+}
+ 
+.search_input:focus-visible {
+    outline: none;
+}
+ 
+input.search_input::placeholder {
+    color: #cfd2ec;
+    vertical-align: middle;
+}
+ 
+.search_img {
+    top: 7px;
+    right: 8px;
+}
+ 
+.navbar-toggler {
+    border: 3px solid #f19159;
+}
+ 
+.navbar-toggler-icon {
+    background-image: url("https://cdn-icons-png.flaticon.com/512/3209/3209074.png");
+}
+ 
+.navbar-toggler:focus {
+    box-shadow: none;
+}

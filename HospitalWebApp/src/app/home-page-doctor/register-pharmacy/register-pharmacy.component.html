@@ -1,0 +1,65 @@
+<div class="container">
+    <h3 class="fw-bold" style="color: rgb(103, 165, 216);">REGISTER PHARMACY</h3>
+
+    <form [formGroup]="PharmacyInfoForm" (ngSubmit)="onSubmit()">
+        <input class="form-control" type="hidden" name="pharmacyInforId" formControlName="pharmacyInforId">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Department</mat-label>
+                    <input matInput type="text" name="department" formControlName="department" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Patient Name</mat-label>
+                    <input matInput type="text" name="department" [value]="this.data.name" readonly>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Status</mat-label>
+                    <input matInput type="text" name="status" formControlName="status" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="number" name="quantity" min="0" max="50" step="1" formControlName="quantity"
+                        required>
+                </mat-form-field>
+                <div *ngIf="quantity && quantity.invalid && quantity.touched">
+                    <div *ngIf="quantity.errors?.['required']">
+                        <p class="text" style="color: red;">quantity must be required</p>
+                    </div>
+                    <div *ngIf="quantity.errors?.['min'] || quantity.errors?.['max']">
+                        <p class="text" style="color: red;">Invalid quantity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-form-field appearance="fill">
+            <mat-label> medicineId</mat-label>
+            <mat-select formControlName="medicineId" required>
+                <mat-option *ngFor="let medicine of medicineList"
+                    [value]="medicine.medicineId">{{medicine.medicineName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="medicineId && medicineId.invalid && medicineId.touched">
+            <div *ngIf="medicineId.errors?.['required']">
+                <p class="text" style="color: red;"> Medicine must be required</p>
+            </div>
+        </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea type="text" matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <div class="text-center" style="margin-top: 2%; width: 100%;">
+            <button type="submit" style=" width: 60%;" class="btn btn-lg btn-outline-danger"
+                [disabled]="PharmacyInfoForm.invalid">Submit</button>
+        </div>
+    </form>
+</div>

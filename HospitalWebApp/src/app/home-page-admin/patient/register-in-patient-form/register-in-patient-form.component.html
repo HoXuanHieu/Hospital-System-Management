@@ -1,0 +1,124 @@
+<h2 class="fw-bold"> Register In-Patient</h2>
+<h3 class="fw-bold"> Patient name: {{patientService.formData.patientName}}</h3>
+<div class="container">
+    <form action="" [formGroup]="InpatientForm" (ngSubmit)="onSubmitInPatient()">
+        <input type="hidden" name="patientId" formControlName="patientId" readonly>
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Family's Phone</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="phone number" name="familyPhone"
+                required pattern="\d*" title="please enter 10 number start with 0" formControlName="familyPhone"
+                (keypress)="numberOnly($event)">
+            <div *ngIf="familyPhone && familyPhone.invalid && familyPhone.touched">
+                <div *ngIf="familyPhone.errors?.['required']">
+                    <p class="text" style="color: red;">Phone must required</p>
+                </div>
+                <div *ngIf="familyPhone.errors?.['pattern']">
+                    <p class="text" style="color: red;">Phone must be 10 number and start with 0</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Date register</label>
+                <input type="date" class="form-control form control-md" placeholder="Date register" name="dateIn"
+                    required title="Select your date" formControlName="dateIn"
+                    min="{{currentDate | date: 'yyyy-MM-dd'}}" (change)="dateChange(dateIn)">
+                <div *ngIf="dateIn && dateIn.invalid && dateIn.touched">
+                    <div *ngIf="dateIn.errors?.['required']">
+                        <p class="text" style="color: red;">Date register must required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Date Out</label>
+                <input type="date" class="form-control form control-md" placeholder="Date out" name="dateOut" required
+                    title="Select your date" formControlName="dateOut" min="{{startDate | date: 'yyyy-MM-dd'}}">
+                <div *ngIf="dateOut && dateOut.invalid && dateOut.touched">
+                    <div *ngIf="dateOut.errors?.['required']">
+                        <p class="text" style="color: red;">Date Out must required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Department</label>
+            <select class="form-select form-control" name="department" required formControlName="department"
+                title="Choose your department">
+                <option [ngValue]="''" selected>-- Choose one --</option>
+                <option [ngValue]="'Outpatient department (OPD)'">Outpatient department (OPD)</option>
+                <option [ngValue]="'Surgical department'">Surgical department</option>
+                <option [ngValue]="'Inpatient service (IP)'">Inpatient service (IP)</option>
+                <option [ngValue]="'Nursing department'">Nursing department</option>
+                <option [ngValue]="'Physical medicine'">Physical medicine</option>
+                <option [ngValue]="'Paramedical department'">Paramedical department</option>
+                <option [ngValue]="'Rehabilitation department'">Rehabilitation department</option>
+                <option [ngValue]="'Dietary department'">Dietary department</option>
+                <option [ngValue]="'Pharmacy department'">Pharmacy department</option>
+                <option [ngValue]="'Operation theater complex (OT)'">Operation theater complex (OT)</option>
+                <option [ngValue]="'Radiology department (X-ray)'">Radiology department (X-ray)</option>
+                <option [ngValue]="'Non-professional'">Non-professional</option>
+                <option [ngValue]="'Health records'">Health records</option>
+                <option [ngValue]="'disclosure of information'">disclosure of information</option>
+            </select>
+            <div *ngIf="department && department.invalid && department.touched">
+                <div *ngIf="department.errors?.['required']">
+                    <p class="text" style="color: red;">Department must required</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Ward Number</label>
+                <input type="number" class="form-control form control-md" name="wardNum" required
+                    formControlName="wardNum" title="Enter ward number" placeholder="Ward Number" min="1" max="20">
+                <div *ngIf="wardNum && wardNum.invalid && wardNum.touched">
+                    <div *ngIf="wardNum.errors?.['required']">
+                        <p class="text" style="color: red;">Ward Number must required</p>
+                    </div>
+                    <div *ngIf="wardNum.errors?.['min'] || wardNum.errors?.['max']">
+                        <p class="text" style="color: red;">Ward Number have min is 1 and max is 20</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Bed Number</label>
+                <input type="number" class="form-control form control-md" name="bedNum" required
+                    formControlName="bedNum" title="Enter Bed number" placeholder="Bed Number" min="1" max="6">
+                <div *ngIf="bedNum && bedNum.invalid && bedNum.touched">
+                    <div *ngIf="bedNum.errors?.['required']">
+                        <p class="text" style="color: red;">Bed Number must required</p>
+                    </div>
+                    <div *ngIf="bedNum.errors?.['min'] || bedNum.errors?.['max']">
+                        <p class="text" style="color: red;">Bed Number have min is 1 and max is 6</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Doctor</label>
+            <select class="form-control form-control-md" name="staffId" formControlName="staffId" required>
+                <option [value]="''" selected>-- Choose one --</option>
+                <option *ngFor="let doctor of doctorList" [value]="doctor.staffId">{{doctor.staffName}} ||
+                    {{doctor.specialization}}</option>
+            </select>
+            <div *ngIf="staffId && staffId.invalid && staffId.touched">
+                <div *ngIf="staffId.errors?.['required']">
+                    <p class="text" style="color: red;">staffId must required</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Symptoms</label>
+            <textarea class="form-control" placeholder="Symptoms" title="Enter Symptoms" name="symptoms"
+                style="resize: none; height: 100%;" formControlName="symptoms">
+            </textarea>
+        </div>
+        <div>
+            <div class="text-center" style="padding-top: 10px;">
+                <button class="btn btn-info btn-lg btn-block" style="width: 60%;" type="submit"
+                    [disabled]="InpatientForm.invalid">Submit</button>
+            </div>
+        </div>
+    </form>
+
+</div>

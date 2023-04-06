@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg py-3 ">
+    <div class="pe-lg-0 ps-lg-5 container-fluid justify-content-between">
+        <a class="navbar-brand" routerLink="/home-page-doctor">
+            <img src="https://cdn-icons-png.flaticon.com/512/3209/3209074.png" height="60" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">sdasds</span>
+
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+            <div class="nav_left d-lg-flex align-items-center">
+                <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link fw-bold fs-5" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true" mat-button
+                        [matMenuTriggerFor]="doctorService">Welcome
+                        {{user.staffName}}</button>
+                    <mat-menu #doctorService="matMenu">
+                        <button mat-menu-item routerLink="/home-page-doctor">List all Patients in {{user.department}}</button>
+                        <button mat-menu-item routerLink="/surgery-request-for-doctor" >Surgery Request</button>
+                        <button mat-menu-item routerLink="/pharmacy-list">Pharmacy List</button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 ml-auto text-right py-3">
+            <button mat-raised-button color="warn" (click)="Logout()">Log Out</button>
+        </div>
+    </div>
+</nav>

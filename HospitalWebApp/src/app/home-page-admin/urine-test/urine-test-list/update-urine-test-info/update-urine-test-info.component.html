@@ -1,0 +1,116 @@
+
+<h1 class="fw-bold" style="color: rgb(103, 165, 216);">UPDATE URINE TEST</h1>
+<form [formGroup]="urineTestForm" style="padding-top: 2%;" (submit)="onSubmit()">
+    <mat-error *ngIf="patientId && patientId.value==0 " style="color: red;"> Please Select
+        Patient</mat-error>
+    <input type="hidden" formControlName="patientId" required>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label> Mediclates Type</mat-label>
+                <input class="fw-bold" matInput formControlName="mediclatestype" required readonly="">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label> Color</mat-label>
+                <mat-select formControlName="color" required>
+                    <mat-option value="Pale yellow to clear">Pale yellow to clear</mat-option>
+                    <mat-option value="Dark yellow">Dark yellow</mat-option>
+                    <mat-option value="Amber or honey-colored">Amber or honey-colored</mat-option>
+                    <mat-option value="Pink or reddish">Pink or reddish</mat-option>
+                    <mat-option value="Orange">Orange</mat-option>
+                    <mat-option value="Blue or green">Blue or green</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="color && color.invalid && color.touched">
+                <div *ngIf="color.errors?.['required']">
+                    <p class="text" style="color: red;"> Color must be required</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label> Clarity</mat-label>
+                <mat-select formControlName="calrity" required>
+                    <mat-option value="Clear">Clear</mat-option>
+                    <mat-option value="Hazy">Hazy</mat-option>
+                    <mat-option value="Cloudy">Cloudy</mat-option>
+                    <mat-option value="Turbid">Turbid</mat-option>
+                    <mat-option value="Bloody">Bloody</mat-option>
+                    <mat-option value="Brown">Brown</mat-option>
+                    <mat-option value="Yellow">Yellow</mat-option>
+                    <mat-option value="Green">Green</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="calrity && calrity.invalid && calrity.touched">
+                <div *ngIf="calrity.errors?.['required']">
+                    <p class="text" style="color: red;"> Clarity must be required</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label> odor</mat-label>
+                <mat-select formControlName="odor" required>
+                    <mat-option value="Ammonia">Ammonia</mat-option>
+                    <mat-option value="Sweet or fruity">Sweet or fruity</mat-option>
+                    <mat-option value="Fishy">Fishy</mat-option>
+                    <mat-option value="Musty">Musty</mat-option>
+                    <mat-option value="Rotten">Rotten</mat-option>
+                    <mat-option value="Chemical">Chemical</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="odor && odor.invalid && odor.touched">
+                <div *ngIf="odor.errors?.['required']">
+                    <p class="text" style="color: red;">Odor must be required</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label> Specific Gravity</mat-label>
+                <mat-select formControlName="specificgravity" required>
+                    <mat-option value="Normal">Normal</mat-option>
+                    <mat-option value="Hyposthenuria">Hyposthenuria</mat-option>
+                    <mat-option value="Isosthenuria">Isosthenuria</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="specificgravity && specificgravity.invalid && specificgravity.touched">
+                <div *ngIf="specificgravity.errors?.['required']">
+                    <p class="text" style="color: red;"> Specific Gravity must be required</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label> Glucose (mmol/L)</mat-label>
+                <input type="number" min="0" max="10" step="0.1" matInput formControlName="glucose" required>
+            </mat-form-field>
+            <div *ngIf="glucose && glucose.invalid && glucose.touched">
+                <div *ngIf="glucose.errors?.['required']">
+                    <p class="text" style="color: red;">glucose must be required</p>
+                </div>
+                <div *ngIf="glucose.errors?.['min'] || glucose.errors?.['max']">
+                    <p class="text" style="color: red;">Invalid Sacid amount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <mat-option value=""></mat-option> -->
+
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea type="text" matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div class="text-center" style="margin-top: 2%; width: 100%;">
+        <button type="submit" style=" width: 60%;" class="btn btn-lg btn-outline-danger"
+            [disabled]="urineTestForm.invalid">Submit</button>
+    </div>
+</form>

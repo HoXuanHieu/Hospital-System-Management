@@ -1,0 +1,98 @@
+
+<div class="container">
+
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="fw-bold">Update Patient</h4>
+            </div>
+        </div>
+        <input class="form-control" type="hidden" name="patientId" formControlName="patientId">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Name</label>
+                    <input type="text" class="form-control formcontrol-lg" placeholder="Full Name" name="patientName"
+                        required formControlName="patientName" title="Enter your full name">
+                    <div *ngIf="patientName && patientName.invalid && patientName.touched">
+                        <div *ngIf="patientName.errors?.['required']">
+                            <p class="text" style="color: red;">Staff Name must required</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Age</label>
+                    <input type="number" class="form-control formcontrol-lg" placeholder="age" name="age" required
+                        formControlName="age" min="0" max="100" title="Enter your age">
+                    <div *ngIf="age && age.invalid && age.touched">
+                        <div *ngIf="age.errors?.['required']">
+                            <p class="text" style="color: red;">Age must required</p>
+                        </div>
+                        <div *ngIf="age.errors?.['min'] || age.errors?.['max']">
+                            <p class="text" style="color: red;">Age must be greater than 18 and lower 66</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Phone</label>
+                    <input type="text" class="form-control formcontrol-lg" placeholder="phone number" name="phoneNumber"
+                        required pattern="^(0+[0-9]{9})$" title="please enter 10 number start with 0"
+                        formControlName="phoneNumber" (keypress)="numberOnly($event)">
+                    <div *ngIf="phoneNumber && phoneNumber.invalid && phoneNumber.touched">
+                        <div *ngIf="phoneNumber.errors?.['required']">
+                            <p class="text" style="color: red;">Phone must required</p>
+                        </div>
+                        <div *ngIf="phoneNumber.errors?.['pattern']">
+                            <p class="text" style="color: red;">Phone must be 10 number and start with 0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Gender</label>
+                <select class="form-select form-control" name="gender" required required formControlName="gender"
+                    title="Enter your gender">
+                    <option [ngValue]="''" selected>-- Choose one --</option>
+                    <option [ngValue]="'male'">male</option>
+                    <option [ngValue]="'female'">female</option>
+                </select>
+                <div *ngIf="gender && gender.invalid && gender.touched">
+                    <div *ngIf="gender.errors?.['required']">
+                        <p class="text" style="color: red;">Gender must required</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Address</label>
+                    <input type="text" class="form-control formcontrol-lg" placeholder="Address" name="address"
+                        formControlName="address" title="Enter your Address">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Occupation</label>
+                    <input type="text" class="form-control formcontrol-lg" placeholder="Occupation" name="occupation"
+                        formControlName="occupation" title="Enter your occupation">
+                </div>
+            </div>
+        </div>
+        <div class="text-center col-md-12" style="margin: auto; margin-top: 5%; width: 80%;">
+            <div class="btn-group" role="group" style=" width: 100%;">
+                <button type="submit" class="btn btn-lg btn-outline-primary"
+                    [disabled]="patientForm.invalid">Submit</button>
+                <button type="button" class="btn btn-lg btn-outline-danger" mat-dialog-close>Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

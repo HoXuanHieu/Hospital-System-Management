@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg py-3 ">
+  <div class="pe-lg-0 ps-lg-5 container-fluid justify-content-between">
+    <a class="navbar-brand" routerLink="/home-page-admin">
+      <img src="https://cdn-icons-png.flaticon.com/512/3209/3209074.png" height="60" alt="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <div class="nav_left d-lg-flex align-items-center">
+        <nav>
+          <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+              aria-controls="home" aria-selected="true" disabled>Welcome {{user.staffName}}</button>
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+              aria-controls="home" aria-selected="true" routerLink="/home-page-admin">Home</button>
+            <!-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab"
+              routerLink="/doctor" aria-controls="about" aria-selected="false"> Doctor
+            </button> -->
+            <button mat-button  class="nav-link" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab"
+            aria-controls="about" aria-selected="false" routerLink="/list-doctor">Doctor</button>
+            <button mat-button class="nav-link" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab"
+            aria-controls="about" aria-selected="false" routerLink="/list-patient">Patient</button>
+           
+            <button mat-button [matMenuTriggerFor]="service" class="nav-link" data-bs-toggle="tab" data-bs-target="#service" type="button" role="tab"
+              aria-controls="service" aria-selected="false">Service</button>
+              <mat-menu #service="matMenu">
+                <button mat-menu-item routerLink="/blood-test-list">Blood Test Information</button>
+                <button mat-menu-item routerLink="/urine-test-list">Urine Test Information</button>            
+                <button mat-menu-item routerLink="/surgery-request-list">Surgery information</button>
+                <button mat-menu-item routerLink="/medicine-list">Medinice Information</button>
+
+              </mat-menu>
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#logout" type="button" role="tab"
+              aria-controls="Logout" aria-selected="false" (click)="Logout()">Logout</button>
+          </div>
+        </nav>
+        <!-- <div class="position-relative d-inline-block me-lg-4">
+                  <input class="search_input ms-5 mb-3 mb-lg-0 ms-lg-0 pe-5 ps-3" type="search" placeholder="Search"
+                      aria-label="Search">
+                  <img class="position-absolute search_img" src="/static_files/svgs/search.svg" width="16" height="16"
+                      alt="twitter">
+              </div> -->
+      </div>
+    </div>
+  </div>
+</nav>

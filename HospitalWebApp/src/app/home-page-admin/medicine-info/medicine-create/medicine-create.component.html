@@ -1,0 +1,54 @@
+<div class="container">
+    <h1 class="fw-bold" style="color: rgb(103, 165, 216);">CREATE MEDICINE</h1>
+    <form [formGroup]="medicineForm" style="padding-top: 2%;" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="medicineId">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Medicine Name</mat-label>
+            <input type="text" matInput formControlName="medicineName" required (change)="checkMedicineName()">
+        </mat-form-field>
+        <div *ngIf="namExist == true">
+            <p class="text" style="color: red;">Medicine Name have existed already</p>
+        </div>
+        <div *ngIf="medicineName && medicineName.invalid && medicineName.touched">
+            <div *ngIf="medicineName.errors?.['required']">
+                <p class="text" style="color: red;">Medicine Name must be required</p>
+            </div>        
+        </div>
+
+        <div class="row">
+            <div class="col-md-6"> <mat-form-field appearance="fill">
+                    <mat-label>Company</mat-label>
+                    <input type="text" matInput formControlName="company" required>
+                </mat-form-field>
+                <div *ngIf="company && company.invalid && company.touched">
+                    <div *ngIf="company.errors?.['required']">
+                        <p class="text" style="color: red;">Company must be required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"><mat-form-field appearance="fill">
+                    <mat-label>Price</mat-label>
+                    <input type="number" step="0.1" matInput formControlName="price" required number
+                        (keypress)="numberOnly($event)">
+                </mat-form-field>
+                <div *ngIf="price && price.invalid && price.touched">
+                    <div *ngIf="price.errors?.['required']">
+                        <p class="text" style="color: red;">Price must be required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea type="text" matInput formControlName="description" style="height: 100px;"></textarea>
+        </mat-form-field>
+
+        <div class="text-center" style="margin-top: 2%; width: 100%;">
+            <button type="button" mat-dialog-close class="btn btn-md btn-outline-danger"> Cancel </button>
+            <button type="submit" style=" margin-left: 10%;" class="btn btn-md btn-outline-success"
+                [disabled]="medicineForm.invalid">Submit</button>
+        </div>
+    </form>
+</div>

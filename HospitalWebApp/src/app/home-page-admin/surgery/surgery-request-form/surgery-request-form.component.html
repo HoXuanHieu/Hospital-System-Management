@@ -1,0 +1,167 @@
+<app-header-admin></app-header-admin>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" >
+            <h2 class="fw-bold" style="color: rgb(103, 165, 216);">PATIENTS LIST</h2>
+            <div class="mat-elevation-z8">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Search patient</mat-label>
+                    <input matInput (keyup)="SearchPatient($event)" #input>
+                </mat-form-field>
+                <table mat-table matSort #patientSort="matSort" [dataSource]="dataSoursePatient">
+                    <ng-container matColumnDef="patientName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Patient Name </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordPatient(element)"
+                            style="cursor: pointer;"> {{element.patientName}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="age">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Age </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordPatient(element)"
+                            style="cursor: pointer;"> {{element.age}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="phoneNumber">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Phone Number </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordPatient(element)"
+                            style="cursor: pointer;"> {{element.phoneNumber}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="gender">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Gender </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordPatient(element)"
+                            style="cursor: pointer;"> {{element.gender}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedPatientColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedPatientColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+                <mat-paginator #PatientPaginatior [pageSizeOptions]="[5]" showFirstLastButtons="">
+                </mat-paginator>
+            </div>
+            <h2 class="fw-bold" style="color: rgb(103, 165, 216); margin-top: 3%;">DOCTORS LIST</h2>
+            <div class="mat-elevation-z8">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Search Doctor</mat-label>
+                    <input matInput (keyup)="SearchDoctor($event)" #inputDoctor>
+                </mat-form-field>
+                <table mat-table matSort #doctorSort="matSort" [dataSource]="dataSourseDoctor">
+                    <ng-container matColumnDef="staffName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Doctor Name </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordDoctor(element)"
+                            style="cursor: pointer;"> {{element.staffName}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="age">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Age </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordDoctor(element)"
+                            style="cursor: pointer;"> {{element.age}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="phoneNumber">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Phone Number </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordDoctor(element)"
+                            style="cursor: pointer;"> {{element.phoneNumber}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="gender">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Gender </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordDoctor(element)"
+                            style="cursor: pointer;"> {{element.gender}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="department">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Department </th>
+                        <td mat-cell *matCellDef="let element" (click)="selectRecordDoctor(element)"
+                            style="cursor: pointer;"> {{element.department}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedDoctorColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedDoctorColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{inputDoctor.value}}"</td>
+                    </tr>
+                </table>
+                <mat-paginator #DoctorPaginatior [pageSizeOptions]="[5]" showFirstLastButtons="">
+                </mat-paginator>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="fw-bold" style="color: rgb(103, 165, 216);">SURGERY REQUEST REGISTER</h1>
+            <form [formGroup]="surgeryRequestForm" style="padding-top: 2%;" (submit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Patient</mat-label>
+                            <input class="fw-bold" matInput disabled [value]="patientService.formData.patientName">
+                        </mat-form-field>
+                        <mat-error *ngIf="patientId && patientId.value==0 " style="color: red;"> Please Select
+                            Patient</mat-error>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Doctor Surgery</mat-label>
+                            <input class="fw-bold" matInput disabled [value]="doctorService.formData.staffName">
+                        </mat-form-field>
+                        <mat-error *ngIf="staffId && staffId.value==0 " style="color: red;"> Please Select
+                            Doctor</mat-error>
+                    </div>
+                </div>
+                <!-- surgeryTpye: new FormControl('', [Validators.required]),
+    surgeryDate: new FormControl('', [Validators.required]),
+    status: new FormControl('', [Validators.required]), -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Status</mat-label>
+                            <input type="text" matInput formControlName="status" required>
+                        </mat-form-field>
+                        <div *ngIf="status && status.invalid && status.touched">
+                            <div *ngIf="status.errors?.['required']">
+                                <p class="text" style="color: red;">Status must be required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label> Surgery Tpye</mat-label>
+                            <mat-select formControlName="surgeryTpye" required>
+                                <mat-option value="Appendectomy">Appendectomy</mat-option>
+                                <mat-option value="Cholecystectomy">Cholecystectomy</mat-option>
+                                <mat-option value="Coronary artery bypass grafting (CABG)">Coronary artery bypass grafting (CABG)</mat-option>
+                                <mat-option value="Hysterectomy">Hysterectomy</mat-option>
+                                <mat-option value="Mastectomy">Mastectomy</mat-option>
+                                <mat-option value="Prostatectomy">Prostatectomy</mat-option>
+                                <mat-option value="Rhinoplasty">Rhinoplasty</mat-option>
+                                <mat-option value="Spinal fusion">Spinal fusion</mat-option>
+                                <mat-option value="Tonsillectomy">Tonsillectomy</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="surgeryTpye && surgeryTpye.invalid && surgeryTpye.touched">
+                            <div *ngIf="surgeryTpye.errors?.['required']">
+                                <p class="text" style="color: red;">surgeryTpye must be required</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Surgery Date</mat-label>
+                    <input type="date" min="{{currentDate | date: 'yyyy-MM-dd'}}" matInput formControlName="surgeryDate" required>
+                </mat-form-field>
+                <div *ngIf="surgeryDate && surgeryDate.invalid && surgeryDate.touched">
+                    <div *ngIf="surgeryDate.errors?.['required']">
+                        <p class="text" style="color: red;">Surgery Date must be required</p>
+                    </div>
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea type="text" matInput formControlName="description"></textarea>
+                </mat-form-field>
+                <div class="text-center" style="margin-top: 2%; width: 100%;">
+                    <button type="submit" style=" width: 60%;" class="btn btn-lg btn-outline-danger"
+                        [disabled]="surgeryRequestForm.invalid">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

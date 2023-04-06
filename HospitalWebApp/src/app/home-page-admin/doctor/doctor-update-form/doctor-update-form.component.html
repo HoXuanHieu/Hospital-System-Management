@@ -1,0 +1,334 @@
+<app-header-admin></app-header-admin>
+
+<div class="container" style="padding-top: 70px;">
+    <!-- <form #form="ngForm" novalidate (submit)="onSubmit(form)">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="fw-bold">Update Doctor</h4>
+            </div>
+        </div>
+        <input class="form-control" type="hidden" name="staffId" [value]="doctorService.formData.staffId">
+        <div class="form-group">
+
+            <label class="fw-bold" style="padding: 5px;">Name</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="Full Name" name="staffName"
+                #staffName="ngModel" [(ngModel)]="this.doctorService.formData.staffName" required
+                [class.invalid]="staffName.invalid && staffName.touched" title="Enter your full name">
+        </div>
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">User Name</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="User Name" name="userName"
+                #userName="ngModel" [(ngModel)]="this.doctorService.formData.userName" required title="Enter your user name"
+                [class.invalid]="userName.invalid && userName.touched">
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Password</label>
+                <input type="password" class="form-control formcontrol-lg" placeholder="Password" name="password"
+                    #password="ngModel" [(ngModel)]="this.doctorService.formData.password" required
+                    [class.invalid]="password.invalid && password.touched" title="Enter your password">
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Department</label>
+                    <select class="form-select form-control" name="department" required #department="ngModel"
+                        [(ngModel)]="this.doctorService.formData.department" required
+                        [class.invalid]="department.invalid && department.touched"  title="Choose your department">
+                        <option [ngValue]="''" selected>-- Choose one --</option>
+                        <option [ngValue]="'Outpatient department (OPD)'">Outpatient department (OPD)</option>
+                        <option [ngValue]="'Surgical department'">Surgical department</option>
+                        <option [ngValue]="'Inpatient service (IP)'">Inpatient service (IP)</option>
+                        <option [ngValue]="'Nursing department'">Nursing department</option>
+                        <option [ngValue]="'Physical medicine'">Physical medicine</option>
+                        <option [ngValue]="'Paramedical department'">Paramedical department</option>
+                        <option [ngValue]="'Rehabilitation department'">Rehabilitation department</option>
+                        <option [ngValue]="'Dietary department'">Dietary department</option>
+                        <option [ngValue]="'Pharmacy department'">Pharmacy department</option>
+                        <option [ngValue]="'Operation theater complex (OT)'">Operation theater complex (OT)</option>
+                        <option [ngValue]="'Radiology department (X-ray)'">Radiology department (X-ray)</option>
+                        <option [ngValue]="'Non-professional'">Non-professional</option>
+                        <option [ngValue]="'Health records'">Health records</option>
+                        <option [ngValue]="'disclosure of information'">disclosure of information</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Specialization</label>
+            <select class="form-select form-control" name="specialization" #specialization="ngModel"
+                [(ngModel)]="this.doctorService.formData.specialization"  title="Choose your specialization">
+                <option [ngValue]="''" selected>-- Choose one --</option>
+                <option [ngValue]="'internal medicine'">internal medicine</option>
+                <option [ngValue]="'obstetrics and gynecology'">obstetrics and gynecology</option>
+                <option [ngValue]="'pediatrics'">pediatrics</option>
+                <option [ngValue]="'pathology'">pathology</option>
+                <option [ngValue]="'anesthesiology'">anesthesiology</option>
+                <option [ngValue]="'ophthalmology'">ophthalmology</option>
+                <option [ngValue]="'surgery'">surgery</option>
+                <option [ngValue]="'urology'">urology</option>
+                <option [ngValue]="'radiology'">radiology</option>
+                <option [ngValue]="'psychiatry and neurology'">psychiatry and neurology</option>
+                <option [ngValue]="'plastic surgery'">plastic surgery</option>
+            </select>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><label class="fw-bold" style="padding: 5px;">Gender</label>
+                <select class="form-select form-control" name="gender" required #gender="ngModel"
+                    [(ngModel)]="this.doctorService.formData.gender" required [class.invalid]="gender.invalid && gender.touched" title="Enter your gender" >
+                    <option [ngValue]="''" selected>-- Choose one --</option>
+                    <option [ngValue]="'male'">male</option>
+                    <option [ngValue]="'female'">female</option>
+                </select>
+
+            </div>
+            <div class="col-md-3">
+                <label class="fw-bold" style="padding: 5px;">age</label>
+                <input type="number" class="form-control formcontrol-lg" placeholder="age" name="age" required required
+                    #age="ngModel" min="18" max="65" [(ngModel)]="this.doctorService.formData.age" required title="Enter your age  "
+                    [class.invalid]="age.invalid && age.touched">
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Phone</label>
+                <input type="text" class="form-control formcontrol-lg" placeholder="phone number" name="phoneNumber"
+                    required pattern="^(0+[0-9]{9})$" title="please enter 10 number start with 0" required
+                    #phoneNumber="ngModel" [(ngModel)]="this.doctorService.formData.phoneNumber" required
+                    [class.invalid]="phoneNumber.invalid && phoneNumber.touched">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Address</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="Address" name="address"
+                #address="ngModel" [(ngModel)]="this.doctorService.formData.address" >
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <label class="fw-bold" style="padding: 5px;">Email</label>
+                <input type="text" class="form-control formcontrol-lg" placeholder="Email" name="email" required
+                    #email="ngModel" [(ngModel)]="this.doctorService.formData.email" required
+                    [class.invalid]="email.invalid && email.touched">
+            </div>
+
+            <div class="col-md-3">
+                <label class="fw-bold" style="padding: 5px;">Role</label>
+                <select class=" form-control form-select" name="role" required #role="ngModel"
+                    [(ngModel)]="this.doctorService.formData.role" required [class.invalid]="role.invalid && role.touched">
+                    <option value="Doctor">Doctor</option>
+                    <option value="Employee">Employee</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-12" style="padding-top: 10px;">
+                <button class="btn btn-info btn-lg btn-block" type="submit"
+                    [disabled]="form.invalid">Submit</button>
+            </div>
+        </div>
+
+    </form> -->
+
+    <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 style="color: rgb(103, 165, 216);" class="fw-bold">UPDATE DOCTOR</h1>
+            </div>
+        </div>
+        <input class="form-control" type="hidden" name="staffId" formControlName="staffId">
+
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Name</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="Full Name" name="staffName" required
+                formControlName="staffName" title="Enter your full name">
+            <div *ngIf="staffName && staffName.invalid && staffName.touched">
+                <div *ngIf="staffName.errors?.['required']">
+                    <p class="text" style="color: red;">Staff Name must required</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">User Name</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="User Name" name="userName"
+                formControlName="userName" required title="Enter your user name" (change)="checkUserNameExist()">
+            <div *ngIf="userNameExist == true">
+                <p class="text" style="color: red;">UserName have existed already</p>
+            </div>
+            <div *ngIf="userName && userName.invalid && userName.touched">
+                <div *ngIf="userName.errors?.['required']">
+                    <p class="text" style="color: red;">User name must required</p>
+                </div>
+                <div *ngIf="userName.errors?.['minlength']">
+                    <p class="text" style="color: red;">minlength User name is 5 </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Password</label>
+                <input type="password" class="form-control formcontrol-lg" placeholder="Password" name="password"
+                    required formControlName="password" title="Enter your password">
+                <div *ngIf="password && password.invalid && password.touched">
+                    <div *ngIf="password.errors?.['required']">
+                        <p class="text" style="color: red;">Password must required</p>
+                    </div>
+                    <div *ngIf="password.errors?.['minlength']">
+                        <p class="text" style="color: red;">minlength password is 8 </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="fw-bold" style="padding: 5px;">Department</label>
+                    <select class="form-select form-control" name="department" required required
+                        formControlName="department" title="Choose your department">
+                        <option [ngValue]="''" selected>-- Choose one --</option>
+                        <option [ngValue]="'Outpatient department (OPD)'">Outpatient department (OPD)</option>
+                        <option [ngValue]="'Surgical department'">Surgical department</option>
+                        <option [ngValue]="'Inpatient service (IP)'">Inpatient service (IP)</option>
+                        <option [ngValue]="'Nursing department'">Nursing department</option>
+                        <option [ngValue]="'Physical medicine'">Physical medicine</option>
+                        <option [ngValue]="'Paramedical department'">Paramedical department</option>
+                        <option [ngValue]="'Rehabilitation department'">Rehabilitation department</option>
+                        <option [ngValue]="'Dietary department'">Dietary department</option>
+                        <option [ngValue]="'Pharmacy department'">Pharmacy department</option>
+                        <option [ngValue]="'Operation theater complex (OT)'">Operation theater complex (OT)</option>
+                        <option [ngValue]="'Radiology department (X-ray)'">Radiology department (X-ray)</option>
+                        <option [ngValue]="'Non-professional'">Non-professional</option>
+                        <option [ngValue]="'Health records'">Health records</option>
+                        <option [ngValue]="'disclosure of information'">disclosure of information</option>
+                    </select>
+                    <div *ngIf="department && department.invalid && department.touched">
+                        <div *ngIf="department.errors?.['required']">
+                            <p class="text" style="color: red;">Department must required</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Specialization</label>
+            <select class="form-select form-control" name="specialization" formControlName="specialization"
+                title="Choose your specialization">
+                <option [ngValue]="''" selected>-- Choose one --</option>
+                <option [ngValue]="'internal medicine'">internal medicine</option>
+                <option [ngValue]="'obstetrics and gynecology'">obstetrics and gynecology</option>
+                <option [ngValue]="'pediatrics'">pediatrics</option>
+                <option [ngValue]="'pathology'">pathology</option>
+                <option [ngValue]="'anesthesiology'">anesthesiology</option>
+                <option [ngValue]="'ophthalmology'">ophthalmology</option>
+                <option [ngValue]="'surgery'">surgery</option>
+                <option [ngValue]="'urology'">urology</option>
+                <option [ngValue]="'radiology'">radiology</option>
+                <option [ngValue]="'psychiatry and neurology'">psychiatry and neurology</option>
+                <option [ngValue]="'plastic surgery'">plastic surgery</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><label class="fw-bold" style="padding: 5px;">Gender</label>
+                <select class="form-select form-control" name="gender" required required formControlName="gender"
+                    title="Enter your gender">
+                    <option [ngValue]="''" selected>-- Choose one --</option>
+                    <option [ngValue]="'male'">male</option>
+                    <option [ngValue]="'female'">female</option>
+                </select>
+                <div *ngIf="gender && gender.invalid && gender.touched">
+                    <div *ngIf="gender.errors?.['required']">
+                        <p class="text" style="color: red;">Gender must required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="fw-bold" style="padding: 5px;">Age</label>
+                <input type="number" class="form-control formcontrol-lg" placeholder="age" name="age" required
+                    formControlName="age" min="18" max="65" title="Enter your age">
+                <div *ngIf="age && age.invalid && age.touched">
+                    <div *ngIf="age.errors?.['required']">
+                        <p class="text" style="color: red;">Age must required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold" style="padding: 5px;">Phone</label>
+                <input type="text" class="form-control formcontrol-lg" placeholder="phone number" name="phoneNumber"
+                    required pattern="^(0+[0-9]{9})$" title="please enter 10 number start with 0"
+                    formControlName="phoneNumber" (keypress)="numberOnly($event)" (change)="checkPhoneExist()">
+                <div *ngIf="phoneNumberExist == true">
+                    <p class="text" style="color: red;">Phone Number have existed already</p>
+                </div>
+                <div *ngIf="phoneNumber && phoneNumber.invalid && phoneNumber.touched">
+                    <div *ngIf="phoneNumber.errors?.['required']">
+                        <p class="text" style="color: red;">Phone must required</p>
+                    </div>
+                    <div *ngIf="phoneNumber.errors?.['pattern']">
+                        <p class="text" style="color: red;">Phone must be 10 number and start with 0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="fw-bold" style="padding: 5px;">Address</label>
+            <input type="text" class="form-control formcontrol-lg" placeholder="Address" name="address"
+                formControlName="address" title="Enter your Address">
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <label class="fw-bold" style="padding: 5px;">Email</label>
+                <input type="text" class="form-control formcontrol-lg" placeholder="Email" name="email" required
+                    title="Enter your email" formControlName="email" (change)="checkEmail()">
+                <div *ngIf="EmailExist == true">
+                    <p class="text" style="color: red;">Email have existed already</p>
+                </div>
+                <div *ngIf="email && email.invalid && email.touched">
+                    <div *ngIf="email.errors?.['required']">
+                        <p class="text" style="color: red;">Email must required</p>
+                    </div>
+                    <div *ngIf="email.errors?.['email']">
+                        <p class="text" style="color: red;">Email must be correct format (Ex: abc123@abc.com)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="fw-bold" style="padding: 5px;">Role</label>
+                <select class=" form-control form-select" name="role" required formControlName="role"
+                    title="select role">
+                    <option value="Doctor">Doctor</option>
+                    <option value="Employee">Employee</option>
+                </select>
+                <div *ngIf="role && role.invalid && role.touched">
+                    <div *ngIf="role.errors?.['required']">
+                        <p class="text" style="color: red;">Role must required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 5%; width: 100%;">
+            <button type="button" class="btn btn-lg btn-outline-danger" (click)="goBack()">Cancel</button>
+            <button style="margin-left: 10%;" type="submit" class="btn btn-lg btn-outline-success"
+            [disabled]="doctorForm.invalid">Update</button>
+        </div>
+
+        <!-- <div class="btn-group" style="padding-top: 20px; margin: auto;">
+            <button class="btn btn-info btn-lg btn-block"  type="submit">Submit</button>
+            <button class="btn btn-secondary btn-lg btn-block" type="button" disabled> ||</button>
+            <button class="btn btn-danger btn-lg btn-block" type="button" > Cancel</button>
+        </div> -->
+    </form>
+</div>

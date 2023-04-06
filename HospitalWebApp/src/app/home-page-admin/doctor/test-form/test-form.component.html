@@ -1,0 +1,6 @@
+<div class="container">
+    <h1>help</h1>
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="box">
+        <div *cdkVirtualFor="let item of items" class="number">{{item}}</div>
+      </cdk-virtual-scroll-viewport>
+</div>

@@ -1,0 +1,14 @@
+table{
+    width: 100%;
+}
+.viewport{
+    height: 100px;
+}
+.items{
+    height: 20px;
+}
+
+th {
+    font-weight: bold;
+    font-size: medium;
+}
