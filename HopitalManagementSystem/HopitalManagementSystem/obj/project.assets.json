@@ -3502,19 +3502,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ho Hieu\\.nuget\\packages\\": {}
+    "C:\\Users\\Acer\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\HospitalManagement\\HopitalManagementSystem\\HopitalManagementSystem\\HospitalManagementSystem.csproj",
+      "projectUniqueName": "D:\\project\\HospitalManagement\\Hospital-System-Management\\HopitalManagementSystem\\HopitalManagementSystem\\HospitalManagementSystem.csproj",
       "projectName": "HospitalManagementSystem",
-      "projectPath": "D:\\Project\\HospitalManagement\\HopitalManagementSystem\\HopitalManagementSystem\\HospitalManagementSystem.csproj",
-      "packagesPath": "C:\\Users\\Ho Hieu\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\HospitalManagement\\HopitalManagementSystem\\HopitalManagementSystem\\obj\\",
+      "projectPath": "D:\\project\\HospitalManagement\\Hospital-System-Management\\HopitalManagementSystem\\HopitalManagementSystem\\HospitalManagementSystem.csproj",
+      "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+      "outputPath": "D:\\project\\HospitalManagement\\Hospital-System-Management\\HopitalManagementSystem\\HopitalManagementSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ho Hieu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3620,7 +3620,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
